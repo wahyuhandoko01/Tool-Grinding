@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Praktik Tool Grinding (TGr) — Politeknik ATMI Surakarta</title>
+<meta name="description" content="Dashboard & Modul Edukasi Praktik Tool Grinding (TGr) — panduan komprehensif mahasiswa sebelum dan selama praktik di Section Tool Grinding Politeknik ATMI Surakarta."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%230369a1'/><circle cx='32' cy='32' r='24' fill='none' stroke='white' stroke-width='6' stroke-dasharray='6 5'/><circle cx='32' cy='32' r='11' fill='white'/></svg>"/>
+
+<!-- Terapkan tema sebelum render (hindari kedipan) -->
+<script>
+  (function(){try{
+    var t=localStorage.getItem('tgr-theme');
+    if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.documentElement.classList.add('dark');
+    }
+  }catch(e){}})();
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          atmi: {50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e'}
+        },
+        fontFamily: {
+          display: ['"Chakra Petch"','sans-serif'],
+          body: ['"Plus Jakarta Sans"','sans-serif'],
+          mono2: ['"JetBrains Mono"','monospace']
+        }
+      }
+    }
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ============ DASAR ============ */
+:root{ color-scheme: light; }
+html.dark{ color-scheme: dark; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
+  background:#F8FAFC; color:#0f172a;
+  transition:background-color .5s ease,color .5s ease;
+  overflow-x:hidden;
+}
+html.dark body{ background:#0F172A; color:#e2e8f0; }
+section{ scroll-margin-top:96px; }
+::selection{ background:rgba(2,132,199,.28); }
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:rgba(100,116,139,.4); border-radius:8px; border:2px solid transparent; background-clip:content-box; }
+html.dark ::-webkit-scrollbar-thumb{ background:rgba(148,163,184,.32); border-radius:8px; border:2px solid transparent; background-clip:content-box; }
+
+/* ============ LATAR INDUSTRIAL ============ */
+.bg-fx{ position:fixed; inset:0; z-index:-10; pointer-events:none; }
+.bg-fx .mesh{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(52% 42% at 85% -5%, rgba(2,132,199,.14), transparent 65%),
+    radial-gradient(40% 38% at -8% 30%, rgba(14,165,233,.12), transparent 60%),
+    radial-gradient(46% 44% at 70% 108%, rgba(3,105,161,.10), transparent 62%);
+}
+html.dark .bg-fx .mesh{
+  background:
+    radial-gradient(52% 42% at 85% -5%, rgba(34,211,238,.12), transparent 65%),
+    radial-gradient(42% 40% at -6% 34%, rgba(14,116,144,.16), transparent 60%),
+    radial-gradient(46% 44% at 72% 108%, rgba(56,189,248,.08), transparent 62%);
+}
+.bg-fx .grid-lines{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(to right, rgba(100,116,139,.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(100,116,139,.10) 1px, transparent 1px);
+  background-size:36px 36px;
+  -webkit-mask-image:radial-gradient(85% 72% at 50% 20%, #000 30%, transparent 100%);
+          mask-image:radial-gradient(85% 72% at 50% 20%, #000 30%, transparent 100%);
+}
+html.dark .bg-fx .grid-lines{
+  background-image:
+    linear-gradient(to right, rgba(148,163,184,.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148,163,184,.09) 1px, transparent 1px);
+}
+.bg-fx .hatch{
+  position:absolute; inset:0;
+  background-image:repeating-linear-gradient(-45deg, rgba(100,116,139,.05) 0 1px, transparent 1px 14px);
+  -webkit-mask-image:linear-gradient(to top, #000, transparent 38%);
+          mask-image:linear-gradient(to top, #000, transparent 38%);
+}
+
+/* ============ GLASSMORPHISM ============ */
+.glass{
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(14px) saturate(1.35);
+  -webkit-backdrop-filter:blur(14px) saturate(1.35);
+  border:1px solid rgba(15,23,42,.08);
+  box-shadow:0 8px 28px -18px rgba(2,132,199,.28);
+}
+html.dark .glass{
+  background:rgba(30,41,59,.55);
+  border-color:rgba(148,163,184,.14);
+  box-shadow:0 12px 32px -18px rgba(0,0,0,.65);
+}
+.glass-header{
+  background:rgba(248,250,252,.8);
+  backdrop-filter:blur(18px) saturate(1.5);
+  -webkit-backdrop-filter:blur(18px) saturate(1.5);
+  border-bottom:1px solid rgba(15,23,42,.08);
+  transition:box-shadow .3s ease, background-color .4s ease;
+}
+.glass-header.scrolled{ box-shadow:0 12px 32px -18px rgba(2,132,199,.35); }
+html.dark .glass-header{
+  background:rgba(15,23,42,.72);
+  border-bottom-color:rgba(148,163,184,.12);
+}
+html.dark .glass-header.scrolled{ box-shadow:0 14px 34px -18px rgba(34,211,238,.18); }
+
+/* ============ TIPOGRAFI & ELEMEN ============ */
+.kicker{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:'JetBrains Mono',monospace; font-size:.72rem;
+  letter-spacing:.22em; text-transform:uppercase; color:#0284c7; font-weight:700;
+}
+html.dark .kicker{ color:#22d3ee; text-shadow:0 0 14px rgba(34,211,238,.45); }
+.kicker::before{ content:''; width:34px; height:2px; background:currentColor; border-radius:2px; }
+
+.icon-tile{
+  width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
+  font-size:1.25rem; color:#0369a1;
+  background:rgba(2,132,199,.10); border:1px solid rgba(2,132,199,.22);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+}
+html.dark .icon-tile{
+  color:#22d3ee; background:rgba(34,211,238,.10);
+  border-color:rgba(34,211,238,.28); box-shadow:0 0 18px rgba(34,211,238,.15);
+}
+article:hover .icon-tile{ transform:rotate(-6deg) scale(1.06); }
+
+.card-lift{ transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; }
+.card-lift:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -20px rgba(2,132,199,.38); }
+html.dark .card-lift:hover{ box-shadow:0 24px 44px -20px rgba(34,211,238,.22); }
+
+/* Reveal saat scroll */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.show{ opacity:1; transform:none; }
+
+/* Navigasi */
+.nav-link{ position:relative; transition:color .25s; }
+.nav-link::after{
+  content:''; position:absolute; left:0; right:100%; bottom:-6px; height:2px;
+  background:#0284c7; border-radius:2px; transition:right .3s ease;
+}
+html.dark .nav-link::after{ background:#22d3ee; box-shadow:0 0 10px rgba(34,211,238,.7); }
+.nav-link:hover::after,.nav-link.nav-active::after{ right:0; }
+.nav-link.nav-active{ color:#0369a1; }
+html.dark .nav-link.nav-active{ color:#67e8f9; }
+
+/* Toggle tema */
+#themeKnob{ transition:transform .35s cubic-bezier(.34,1.56,.64,1); }
+html.dark #sunIco{ opacity:0; transform:rotate(90deg) scale(.5); }
+#sunIco{ transition:opacity .3s, transform .3s; }
+#moonIco{ transition:opacity .3s, transform .3s; opacity:0; transform:rotate(-90deg) scale(.5); }
+html.dark #moonIco{ opacity:1; transform:none; }
+
+/* Tab mesin */
+.tab-btn{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.7rem 1.1rem; border-radius:.9rem; font-weight:700; font-size:.875rem;
+  font-family:'Chakra Petch',sans-serif; letter-spacing:.02em;
+  border:1px solid rgba(100,116,139,.3); color:#475569;
+  transition:all .25s ease; cursor:pointer; background:transparent;
+}
+html.dark .tab-btn{ color:#94a3b8; border-color:rgba(148,163,184,.25); }
+.tab-btn:hover{ color:#0369a1; border-color:rgba(2,132,199,.55); transform:translateY(-2px); }
+html.dark .tab-btn:hover{ color:#67e8f9; border-color:rgba(34,211,238,.5); }
+.tab-btn.tab-active{
+  background:#0369a1; color:#fff; border-color:transparent;
+  box-shadow:0 12px 26px -12px rgba(2,132,199,.65);
+}
+html.dark .tab-btn.tab-active{
+  background:rgba(34,211,238,.14); color:#67e8f9; border-color:rgba(34,211,238,.5);
+  box-shadow:0 0 24px rgba(34,211,238,.2);
+}
+
+/* Alur penggerindaan */
+.flow-num{
+  width:42px; height:42px; flex:none; border-radius:12px;
+  font-family:'JetBrains Mono',monospace; font-weight:700; display:grid; place-items:center;
+  background:#0369a1; color:#fff;
+}
+html.dark .flow-num{ background:rgba(34,211,238,.13); color:#67e8f9; border:1px solid rgba(34,211,238,.45); }
+.flow-connector{
+  position:relative; margin:.35rem 0 .35rem 20px;
+  padding:.55rem 0 .55rem 26px;
+  border-left:2px dashed rgba(100,116,139,.45);
+}
+html.dark .flow-connector{ border-left-color:rgba(148,163,184,.3); }
+.flow-loop{
+  display:inline-flex; align-items:center; gap:.45rem; margin-top:.3rem;
+  font-size:.72rem; font-weight:600; color:#e11d48;
+  background:rgba(244,63,94,.08); border:1px solid rgba(244,63,94,.25);
+  padding:.25rem .6rem; border-radius:.6rem;
+}
+html.dark .flow-loop{ color:#fb7185; }
+
+/* Tabel & spesifikasi */
+.spec-row{ display:flex; justify-content:space-between; gap:1rem; padding:.55rem 0; border-bottom:1px dashed rgba(100,116,139,.25); font-size:.875rem; }
+html.dark .spec-row{ border-bottom-color:rgba(148,163,184,.18); }
+.spec-row:last-child{ border-bottom:none; }
+.spec-val{ font-family:'JetBrains Mono',monospace; font-weight:700; color:#0369a1; white-space:nowrap; }
+html.dark .spec-val{ color:#67e8f9; }
+
+.chip{
+  display:inline-flex; align-items:center; gap:.45rem;
+  padding:.4rem .75rem; border-radius:.7rem; font-size:.78rem; font-weight:600;
+  border:1px solid rgba(100,116,139,.3); background:rgba(148,163,184,.08);
+}
+html.dark .chip{ border-color:rgba(148,163,184,.22); background:rgba(148,163,184,.07); }
+
+/* Konten modal */
+.m-row{
+  display:flex; gap:.8rem; align-items:flex-start;
+  padding:.65rem .9rem; border-radius:.85rem;
+  border:1px solid rgba(15,23,42,.08); background:rgba(148,163,184,.07);
+}
+html.dark .m-row{ border-color:rgba(148,163,184,.14); }
+.badge-day{
+  font-family:'JetBrains Mono',monospace; font-size:.66rem; font-weight:700;
+  letter-spacing:.08em; padding:.32rem .6rem; border-radius:.55rem;
+  white-space:nowrap; border:1px solid; flex:none; margin-top:.1rem;
+}
+.tag-free{ color:#059669; font-weight:800; }
+html.dark .tag-free{ color:#34d399; }
+.tag-minus{ color:#e11d48; font-weight:800; }
+html.dark .tag-minus{ color:#fb7185; }
+
+/* Donut bobot penilaian */
+.donut{ width:88px; height:88px; border-radius:50%; position:relative; flex:none; }
+.donut::after{ content:''; position:absolute; inset:11px; border-radius:50%; background:#F1F5F9; transition:background .5s; }
+html.dark .donut::after{ background:#1B2637; }
+.donut-70{ background:conic-gradient(#0284c7 0 70%, #f59e0b 70% 100%); }
+html.dark .donut-70{ background:conic-gradient(#22d3ee 0 70%, #f59e0b 70% 100%); }
+.donut-100{ background:conic-gradient(#0284c7 0 100%); }
+html.dark .donut-100{ background:conic-gradient(#22d3ee 0 100%); }
+
+/* Kalkulator */
+.calc-input{
+  width:100%; padding:.6rem .8rem; border-radius:.75rem;
+  background:rgba(255,255,255,.65); border:1px solid rgba(15,23,42,.14);
+  font-family:'JetBrains Mono',monospace; font-weight:700; color:inherit;
+  transition:border-color .25s, box-shadow .25s;
+}
+html.dark .calc-input{ background:rgba(15,23,42,.5); border-color:rgba(148,163,184,.22); }
+.calc-input:focus{ outline:none; border-color:#0284c7; box-shadow:0 0 0 3px rgba(2,132,199,.25); }
+html.dark .calc-input:focus{ border-color:#22d3ee; box-shadow:0 0 0 3px rgba(34,211,238,.25); }
+.calc-input:disabled{ opacity:.4; }
+.seg-radio input{ display:none; }
+.seg-radio span{
+  display:flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.65rem .5rem; border-radius:.85rem; font-size:.8rem; font-weight:700;
+  border:1px solid rgba(100,116,139,.3); cursor:pointer; transition:all .25s; text-align:center;
+}
+.seg-radio input:checked + span{
+  background:#0369a1; color:#fff; border-color:transparent;
+  box-shadow:0 10px 22px -12px rgba(2,132,199,.7);
+}
+html.dark .seg-radio input:checked + span{
+  background:rgba(34,211,238,.15); color:#67e8f9; border-color:rgba(34,211,238,.5);
+}
+.pulse-num{ animation:pulseNum .45s ease; }
+@keyframes pulseNum{ 0%{ transform:scale(1.12); } 100%{ transform:scale(1); } }
+
+/* Modal */
+#modal .modal-panel{
+  transform:translateY(28px) scale(.96); opacity:0;
+  transition:transform .38s cubic-bezier(.2,.9,.3,1.15), opacity .3s ease;
+}
+#modal.open .modal-panel{ transform:none; opacity:1; }
+#modal.open #modalOverlay{ opacity:1; }
+#modalOverlay{ opacity:0; transition:opacity .3s ease; }
+
+/* Logo gear dekoratif berputar */
+@keyframes spinSlow{ to{ transform:rotate(360deg); } }
+.gear-deco{ position:absolute; color:rgba(100,116,139,.07); animation:spinSlow 46s linear infinite; pointer-events:none; }
+html.dark .gear-deco{ color:rgba(34,211,238,.06); }
+</style>
+</head>
+
+<body class="font-body antialiased">
+
+<!-- Latar industrial: mesh gradient + grid teknik + arsiran -->
+<div class="bg-fx" aria-hidden="true">
+  <div class="mesh"></div>
+  <div class="grid-lines"></div>
+  <div class="hatch"></div>
+</div>
+
+<!-- Progress scroll -->
+<div id="scrollProgress" class="fixed top-0 left-0 h-[3px] z-[70] bg-gradient-to-r from-atmi-600 via-atmi-400 to-cyan-300 dark:from-cyan-500 dark:to-cyan-300" style="width:0%"></div>
+
+<!-- ================= TOP BAR ================= -->
+<header id="topbar" class="fixed top-0 inset-x-0 z-50">
+  <div class="glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-4">
+
+      <!-- Logo + Judul -->
+      <a href="#top" class="flex items-center gap-3 min-w-0 group">
+        <svg viewBox="0 0 64 64" class="w-11 h-11 shrink-0 drop-shadow transition-transform duration-500 group-hover:rotate-[30deg]" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#0369a1"/>
+          <circle cx="32" cy="32" r="25" fill="none" stroke="#e0f2fe" stroke-width="5" stroke-dasharray="5.5 4.5"/>
+          <circle cx="32" cy="32" r="18" fill="#0c4a6e"/>
+          <text x="32" y="31" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" font-family="Chakra Petch, sans-serif">ATMI</text>
+          <text x="32" y="41" text-anchor="middle" font-size="7" fill="#7dd3fc" font-family="JetBrains Mono, monospace">1968</text>
+        </svg>
+        <span class="min-w-0">
+          <span class="block font-display font-bold text-sm sm:text-base leading-tight truncate">Praktik Tool Grinding <span class="text-atmi-600 dark:text-cyan-300">(TGr)</span></span>
+          <span class="hidden md:block text-[11px] leading-tight text-slate-500 dark:text-slate-400">Modul &amp; Panduan Praktik karya Tim Instruktur Politeknik ATMI Surakarta</span>
+        </span>
+      </a>
+
+      <!-- Navigasi cepat -->
+      <nav class="hidden lg:flex items-center gap-6 ml-auto text-sm font-semibold text-slate-600 dark:text-slate-300">
+        <a class="nav-link" href="#overview">Overview</a>
+        <a class="nav-link" href="#aturan-k3">Aturan &amp; K3</a>
+        <a class="nav-link" href="#mesin-modul">Mesin &amp; Modul</a>
+        <a class="nav-link" href="#toleransi-nilai">Toleransi &amp; Nilai</a>
+        <a class="nav-link" href="#instruktur">Instruktur</a>
+      </nav>
+
+      <!-- Toggle tema -->
+      <div class="ml-auto lg:ml-2 flex items-center gap-2">
+        <button id="themeToggle" role="switch" aria-checked="false" aria-label="Ganti mode terang / gelap"
+          class="relative w-16 h-8 rounded-full border border-slate-300/70 dark:border-slate-600 bg-white/60 dark:bg-slate-800/70 backdrop-blur transition-colors">
+          <i id="sunIco" class="fa-solid fa-sun absolute left-2.5 top-1/2 -translate-y-1/2 text-[11px] text-amber-500"></i>
+          <i id="moonIco" class="fa-solid fa-moon absolute right-2.5 top-1/2 -translate-y-1/2 text-[11px] text-cyan-300"></i>
+          <span id="themeKnob" class="absolute top-[3px] left-[3px] w-[26px] h-[26px] rounded-full bg-white dark:bg-slate-950 shadow-md border border-slate-200 dark:border-slate-700"></span>
+        </button>
+        <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-xl grid place-items-center border border-slate-300/70 dark:border-slate-600" aria-label="Buka menu navigasi">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div id="mobileMenu" class="lg:hidden hidden border-t border-slate-200/60 dark:border-slate-700/60">
+      <nav class="px-5 py-4 flex flex-col gap-1 text-sm font-semibold">
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-atmi-600/10" href="#overview"><i class="fa-solid fa-book-open w-5 text-atmi-600 dark:text-cyan-300"></i>Overview</a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-atmi-600/10" href="#aturan-k3"><i class="fa-solid fa-helmet-safety w-5 text-atmi-600 dark:text-cyan-300"></i>Aturan &amp; K3</a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-atmi-600/10" href="#mesin-modul"><i class="fa-solid fa-gears w-5 text-atmi-600 dark:text-cyan-300"></i>Mesin &amp; Modul</a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-atmi-600/10" href="#toleransi-nilai"><i class="fa-solid fa-ruler w-5 text-atmi-600 dark:text-cyan-300"></i>Toleransi &amp; Nilai</a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-atmi-600/10" href="#instruktur"><i class="fa-solid fa-user-gear w-5 text-atmi-600 dark:text-cyan-300"></i>Instruktur</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= HERO ================= -->
+<section id="top" class="relative overflow-hidden">
+  <!-- Percikan api halus di latar hero -->
+  <canvas id="emberCanvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-20 lg:pt-40 lg:pb-28 grid lg:grid-cols-2 gap-12 items-center">
+    <!-- Teks pengantar -->
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 rounded-full border border-atmi-600/30 dark:border-cyan-400/30 bg-atmi-600/10 dark:bg-cyan-400/10 px-3.5 py-1.5 text-[11px] font-bold tracking-widest uppercase text-atmi-700 dark:text-cyan-300 font-mono2">
+        <i class="fa-solid fa-bolt text-amber-500"></i> Modul Praktik Workshop · Section Gerinda 05
+      </span>
+      <h1 class="mt-5 font-display text-4xl sm:text-5xl xl:text-6xl font-bold leading-[1.08] tracking-tight">
+        Selamat Datang di
+        <span class="relative inline-block text-atmi-600 dark:text-cyan-300">
+          Workshop Tool Grinding
+          <span class="absolute left-0 -bottom-1 h-1.5 w-full rounded-full bg-amber-400/80 dark:bg-amber-400/60"></span>
+        </span>
+        <span class="text-slate-500 dark:text-slate-400">(TGr)</span>
+      </h1>
+      <p class="mt-6 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400 max-w-xl">
+        Panduan komprehensif <b class="text-slate-800 dark:text-slate-200">sebelum dan selama praktik</b>: pahami prinsip dasar pengasahan batu gerinda,
+        tuntutan sudut potong alat <span class="font-mono2 text-atmi-700 dark:text-cyan-300">(ISO 2, ISO 6, Cutter)</span>,
+        hingga kaidah keamanan kerja — disusun oleh Tim Instruktur Politeknik ATMI Surakarta.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#overview" class="inline-flex items-center gap-2 rounded-xl bg-atmi-600 px-5 py-3 font-semibold text-white shadow-lg shadow-atmi-600/30 transition hover:bg-atmi-700 hover:-translate-y-0.5 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400 dark:shadow-cyan-500/25">
+          <i class="fa-solid fa-book-open"></i> Mulai Belajar
+        </a>
+        <a href="#aturan-k3" class="inline-flex items-center gap-2 rounded-xl border border-slate-300/80 dark:border-slate-600 px-5 py-3 font-semibold transition hover:border-atmi-500 hover:text-atmi-700 hover:-translate-y-0.5 dark:hover:border-cyan-400 dark:hover:text-cyan-300">
+          <i class="fa-solid fa-helmet-safety"></i> Aturan &amp; K3
+        </a>
+      </div>
+      <!-- Statistik singkat -->
+      <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="glass rounded-2xl px-4 py-3"><p class="font-display font-bold text-2xl text-atmi-700 dark:text-cyan-300">4</p><p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Mesin Praktik</p></div>
+        <div class="glass rounded-2xl px-4 py-3"><p class="font-display font-bold text-2xl text-atmi-700 dark:text-cyan-300">10</p><p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Hari Efektif TPM/PM</p></div>
+        <div class="glass rounded-2xl px-4 py-3"><p class="font-display font-bold text-2xl text-atmi-700 dark:text-cyan-300">2+2</p><p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Kompetensi &amp; Produksi</p></div>
+        <div class="glass rounded-2xl px-4 py-3"><p class="font-display font-bold text-2xl text-atmi-700 dark:text-cyan-300">3</p><p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Instruktur</p></div>
+      </div>
+    </div>
+
+    <!-- Visual interaktif gerinda -->
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="glass rounded-3xl p-4 sm:p-5 relative overflow-hidden">
+        <div class="flex items-center justify-between gap-3 flex-wrap mb-3 px-1">
+          <span class="inline-flex items-center gap-2 font-mono2 text-[11px] font-bold tracking-[.2em] text-slate-500 dark:text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> GRINDING LAB · VISUAL INTERAKTIF
+          </span>
+          <span class="font-mono2 text-[11px] font-bold text-slate-500 dark:text-slate-400">
+            FEED <span id="feedVal" class="text-atmi-700 dark:text-cyan-300">55%</span>
+            · SPINDEL <span class="text-atmi-700 dark:text-cyan-300">3750 RPM</span>
+            · SPARK <span id="sparkCount" class="text-amber-500">0</span>
+          </span>
+        </div>
+        <div id="canvasWrap" class="relative h-[300px] sm:h-[380px] lg:h-[430px] rounded-2xl overflow-hidden border border-slate-200/70 dark:border-slate-700/60 bg-gradient-to-b from-slate-100/80 to-slate-200/50 dark:from-slate-900/80 dark:to-slate-950/80 cursor-crosshair">
+          <canvas id="grindCanvas" class="absolute inset-0 w-full h-full"></canvas>
+        </div>
+        <p class="mt-3 px-1 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2">
+          <i class="fa-solid fa-hand-pointer text-atmi-600 dark:text-cyan-300"></i>
+          Gerakkan kursor melintasi area visual untuk mengatur <b>pemakanan (feed)</b> pahat — perhatikan percikan api makin hebat.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OVERVIEW ================= -->
+<section id="overview" class="relative py-20 lg:py-24">
+  <i class="fa-solid fa-gear gear-deco text-[240px] -top-8 right-0 hidden md:block" aria-hidden="true"></i>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal">
+      <span class="kicker">01 · Overview</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Dasar-Dasar Praktik Gerinda</h2>
+      <p class="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">Sebelum menyentuh mesin, pahami tiga fondasi ini — apa itu mesin gerinda, bagaimana ia bekerja, dan untuk apa alat potong digerinda.</p>
+    </div>
+
+    <div class="mt-10 grid md:grid-cols-3 gap-5">
+      <article class="glass card-lift rounded-2xl p-6 reveal">
+        <div class="icon-tile"><i class="fa-solid fa-book-open"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Pengertian Mesin Gerinda</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Mesin perkakas dengan <b>mata potong jamak</b> — mata potongnya berjumlah sangat banyak — yang digunakan untuk <b>mengasah atau memotong</b> benda kerja dengan tujuan tertentu.</p>
+      </article>
+      <article class="glass card-lift rounded-2xl p-6 reveal" style="transition-delay:.08s">
+        <div class="icon-tile"><i class="fa-solid fa-arrows-spin"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Prinsip Kerja</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Batu gerinda <b>berputar bersentuhan</b> dengan benda kerja sehingga terjadi <b>pengikisan, penajaman, pengasahan,</b> atau <b>pemotongan</b>.</p>
+      </article>
+      <article class="glass card-lift rounded-2xl p-6 reveal" style="transition-delay:.16s">
+        <div class="icon-tile"><i class="fa-solid fa-bullseye"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Tujuan Menggerinda Alat Potong</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Menghasilkan alat potong yang <b>tajam</b>, sehingga saat digunakan untuk pemotongan / penyayatan mampu mengerjakan <b>benda kerja sesuai tuntutan</b>.</p>
+      </article>
+    </div>
+
+    <!-- Mesin yang digunakan -->
+    <div class="mt-14 reveal">
+      <h3 class="font-display text-xl font-bold flex items-center gap-3"><i class="fa-solid fa-industry text-atmi-600 dark:text-cyan-300"></i> Mesin yang Digunakan di Workshop</h3>
+      <div class="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass card-lift rounded-2xl p-5">
+          <p class="font-mono2 font-bold text-atmi-600 dark:text-cyan-300">05.09</p>
+          <h4 class="mt-1 font-display font-bold">Mesin Vitax Twistdrill</h4>
+          <span class="chip mt-3"><i class="fa-solid fa-screwdriver-wrench text-atmi-600 dark:text-cyan-300"></i> Pengasahan mata bor</span>
+        </div>
+        <div class="glass card-lift rounded-2xl p-5">
+          <p class="font-mono2 font-bold text-atmi-600 dark:text-cyan-300">05.08</p>
+          <h4 class="mt-1 font-display font-bold">Mesin Vitax Roughing</h4>
+          <span class="chip mt-3"><i class="fa-solid fa-wrench text-atmi-600 dark:text-cyan-300"></i> Roughing / kasar</span>
+        </div>
+        <div class="glass card-lift rounded-2xl p-5">
+          <p class="font-mono2 font-bold text-atmi-600 dark:text-cyan-300">05.04</p>
+          <h4 class="mt-1 font-display font-bold">Mesin Great D1</h4>
+          <span class="chip mt-3"><i class="fa-solid fa-gears text-atmi-600 dark:text-cyan-300"></i> Alat potong presisi</span>
+        </div>
+        <div class="glass card-lift rounded-2xl p-5">
+          <p class="font-mono2 font-bold text-atmi-600 dark:text-cyan-300">05.02</p>
+          <h4 class="mt-1 font-display font-bold">Mesin Grief</h4>
+          <span class="chip mt-3"><i class="fa-solid fa-compass-drafting text-atmi-600 dark:text-cyan-300"></i> Pahat R2020</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ATURAN & K3 ================= -->
+<section id="aturan-k3" class="relative py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal">
+      <span class="kicker">02 · Aturan &amp; K3</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Aturan Section &amp; APD / K3 Workshop</h2>
+      <p class="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">Klik kartu untuk membuka detail lengkap setiap kelompok aturan. Disiplin dan keselamatan adalah syarat nomor satu sebelum operasional mesin.</p>
+    </div>
+
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <article class="glass card-lift rounded-2xl p-6 reveal cursor-pointer" data-modal="aturanMasuk" tabindex="0" role="button" aria-label="Buka detail aturan masuk">
+        <div class="icon-tile"><i class="fa-solid fa-door-open"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Aturan Masuk &amp; Briefing</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Wajib mandi &amp; rapi (tidak rapi = dipulang), briefing 5 menit sebelum jam masuk.</p>
+        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-atmi-700 dark:text-cyan-300">Lihat Detail <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </article>
+
+      <article class="glass card-lift rounded-2xl p-6 reveal cursor-pointer" data-modal="cleaning" tabindex="0" role="button" aria-label="Buka jadwal cleaning" style="transition-delay:.06s">
+        <div class="icon-tile"><i class="fa-solid fa-broom"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Jadwal Cleaning</h3>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="chip">Harian · Sapu workshop</span>
+          <span class="chip">Jumat · Pel workshop</span>
+          <span class="chip">Rabu · Kantor</span>
+          <span class="chip">Senin · Inventaris</span>
+        </div>
+        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-atmi-700 dark:text-cyan-300">Lihat Detail <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </article>
+
+      <article class="glass card-lift rounded-2xl p-6 reveal cursor-pointer" data-modal="disiplin" tabindex="0" role="button" aria-label="Buka aturan kedisiplinan" style="transition-delay:.12s">
+        <div class="icon-tile"><i class="fa-solid fa-user-shield"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Kedisiplinan</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">APD lengkap, HP dilarang tanpa ijin, matikan peralatan saat istirahat/pulang, tidak masuk wajib telepon Kabeng.</p>
+        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-atmi-700 dark:text-cyan-300">Lihat Detail <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </article>
+
+      <article class="glass card-lift rounded-2xl p-6 reveal cursor-pointer" data-modal="apd" tabindex="0" role="button" aria-label="Buka detail APD dan K3" style="transition-delay:.06s">
+        <div class="icon-tile"><i class="fa-solid fa-helmet-safety"></i></div>
+        <h3 class="mt-4 font-display font-bold text-lg">Kelengkapan APD &amp; K3</h3>
+        <div class="mt-3 flex flex-wrap gap-2 text-slate-500 dark:text-slate-400">
+          <i class="fa-solid fa-shirt" title="Wearpack"></i>
+          <i class="fa-solid fa-shoe-prints" title="Safety shoes"></i>
+          <i class="fa-solid fa-glasses" title="Kacamata safety"></i>
+          <i class="fa-solid fa-head-side-mask" title="Masker"></i>
+          <i class="fa-solid fa-scissors" title="Kuku & rambut pendek"></i>
+        </div>
+        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-atmi-700 dark:text-cyan-300">Lihat Detail <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </article>
+
+      <article class="glass card-lift rounded-2xl p-6 sm:col-span-2 reveal cursor-pointer" data-modal="halPenting" tabindex="0" role="button" aria-label="Buka hal yang perlu diperhatikan" style="transition-delay:.12s">
+        <div class="flex items-start gap-5">
+          <div class="icon-tile"><i class="fa-solid fa-clipboard-list"></i></div>
+          <div class="min-w-0">
+            <h3 class="font-display font-bold text-lg">Hal yang Perlu Diperhatikan</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Lapor saat meninggalkan mesin · cek batu gerinda awal &amp; akhir · kompensasi dihitung Senin · nilai maksimal selesai 1 bulan · logbook dikumpul Jumat akhir minggu.</p>
+            <span class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-atmi-700 dark:text-cyan-300">Lihat Detail <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MESIN & MODUL ================= -->
+<section id="mesin-modul" class="relative py-20 lg:py-24">
+  <i class="fa-solid fa-gear gear-deco text-[300px] top-24 -left-24 hidden lg:block" aria-hidden="true"></i>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal">
+      <span class="kicker">03 · Mesin &amp; Modul</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Capaian Prodi &amp; Explorer Mesin</h2>
+      <p class="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">Target waktu tiap program studi, jadwal rolling mesin, lalu telusuri alur kerja, spesifikasi, dan modul lengkap setiap mesin melalui tab di bawah.</p>
+    </div>
+
+    <!-- Capaian & target prodi -->
+    <div class="mt-10 grid lg:grid-cols-2 gap-5">
+      <article class="glass card-lift rounded-2xl p-6 lg:p-7 reveal">
+        <div class="flex items-start justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3">
+            <div class="icon-tile"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3 class="font-display font-bold text-lg">Prodi TPM &amp; PM</h3>
+          </div>
+          <span class="chip border-atmi-600/40 text-atmi-700 dark:text-cyan-300 dark:border-cyan-400/40"><i class="fa-solid fa-calendar-days"></i> 2 minggu · 10 hari efektif</span>
+        </div>
+        <ul class="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+          <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Rolling mesin <b>dimulai hari Selasa</b> setelah overlapping awal.</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Urutan rolling: <b class="font-mono2">2 hari Vitax → 3 hari Grief → 4 hari Great D1</b>.</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Wajib menyelesaikan <b>2 Kompetensi (GD 1 &amp; GD 2)</b> dan <b>2 Produksi di setiap mesin</b>.</li>
+        </ul>
+        <!-- Timeline rolling -->
+        <div class="mt-5 flex flex-col md:flex-row gap-2">
+          <div class="flex-[1.5] rounded-xl border border-slate-400/40 bg-slate-500/10 px-3 py-2.5 text-center">
+            <p class="text-[10px] font-mono2 font-bold tracking-widest text-slate-500 dark:text-slate-400">HARI 1</p>
+            <p class="text-xs font-bold">Overlapping Awal</p>
+          </div>
+          <div class="flex-2 rounded-xl border border-sky-500/40 bg-sky-500/10 px-3 py-2.5 text-center">
+            <p class="text-[10px] font-mono2 font-bold tracking-widest text-sky-600 dark:text-sky-300">SELASA →</p>
+            <p class="text-xs font-bold">Vitax · 2 hari</p>
+          </div>
+          <div class="flex-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-3 py-2.5 text-center">
+            <p class="text-[10px] font-mono2 font-bold tracking-widest text-cyan-600 dark:text-cyan-300">ROLLING</p>
+            <p class="text-xs font-bold">Grief · 3 hari</p>
+          </div>
+          <div class="flex-4 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2.5 text-center">
+            <p class="text-[10px] font-mono2 font-bold tracking-widest text-amber-600 dark:text-amber-300">FINIS</p>
+            <p class="text-xs font-bold">Great D1 · 4 hari</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass card-lift rounded-2xl p-6 lg:p-7 reveal" style="transition-delay:.1s">
+        <div class="flex items-start justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3">
+            <div class="icon-tile"><i class="fa-solid fa-users-gear"></i></div>
+            <h3 class="font-display font-bold text-lg">TMI · RTM · TMK · TRMK</h3>
+          </div>
+          <span class="chip border-atmi-600/40 text-atmi-700 dark:text-cyan-300 dark:border-cyan-400/40"><i class="fa-solid fa-calendar-days"></i> 1 minggu · 4 hari efektif</span>
+        </div>
+        <ul class="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+          <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Mahasiswa <b>hanya mempelajari mesin Great D1</b>.</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Menyelesaikan <b>2 Nilai Produksi</b> — <b class="font-mono2">ISO 6 &amp; ISO 2</b>.</li>
+        </ul>
+        <div class="mt-6 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 flex gap-3">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+          <p class="text-xs text-slate-600 dark:text-slate-300"><b>Perhatian:</b> waktu singkat — manfaatkan hari efektif dengan fokus pada alur latihan → kompetensi → produksi ISO 6 &amp; ISO 2.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Explorer mesin -->
+    <div class="mt-16 reveal">
+      <h3 class="font-display text-2xl font-bold flex items-center gap-3"><i class="fa-solid fa-diagram-project text-atmi-600 dark:text-cyan-300"></i> Explorer Mesin &amp; Cara Kerja</h3>
+
+      <div class="mt-6 flex flex-wrap gap-3" role="tablist" aria-label="Pilih mesin">
+        <button class="tab-btn tab-active" data-tab="vitax" role="tab" aria-selected="true"><i class="fa-solid fa-screwdriver-wrench"></i> Vitax</button>
+        <button class="tab-btn" data-tab="grief" role="tab" aria-selected="false"><i class="fa-solid fa-compass-drafting"></i> Grief</button>
+        <button class="tab-btn" data-tab="greatd1" role="tab" aria-selected="false"><i class="fa-solid fa-gears"></i> Great D1</button>
+      </div>
+
+      <!-- ===== PANEL VITAX ===== -->
+      <div id="panel-vitax" class="tab-panel mt-6 grid lg:grid-cols-5 gap-5">
+        <div class="lg:col-span-2 space-y-5">
+          <div class="glass rounded-2xl p-6">
+            <span class="kicker">Identitas Mesin</span>
+            <h4 class="mt-2 font-display font-bold text-xl">Vitax Twistdrill &amp; Roughing</h4>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="chip font-mono2"><i class="fa-solid fa-location-dot text-atmi-600 dark:text-cyan-300"></i> 05.09 &amp; 05.08</span>
+              <span class="chip"><i class="fa-solid fa-stopwatch text-amber-500"></i> Estimasi produksi 25 menit</span>
+            </div>
+            <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Mengerjakan latihan sesuai standard.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Siapkan <b>angle gauge</b> dan bor yang sudah disediakan.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Twistdrill produksi <b class="text-rose-600 dark:text-rose-400">dari kamar alat</b>, twistdrill latihan dari instruktur.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Catat ukuran awal dan <b>lapor start</b> kepada instruktur.</li>
+            </ul>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <span class="kicker">Kompensasi Ringkas</span>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400"><b class="tag-free">Latihan:</b> FREE kompensasi (boleh dihabiskan).</p>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400"><b class="tag-free">Produksi:</b> FREE pengurangan 5 mm pertama · lebih dari 5 mm dikenakan <span class="tag-minus">-1 jam per kelipatan 3 mm</span>.</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 glass rounded-2xl p-6 lg:p-7">
+          <span class="kicker">Alur Penggerindaan</span>
+          <h4 class="mt-2 font-display font-bold text-xl mb-4">ALUR PENGERINDAAN MESIN VITAX</h4>
+          <div class="flex gap-4">
+            <div class="flow-num">1</div>
+            <div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4">
+              <p class="font-display font-bold">Latihan 1 — Twist Drill</p>
+              <ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan <b>tanpa estimasi</b>.</li>
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan dengan tuntutan sesuai standard.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flow-connector">
+            <span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i><span class="text-slate-400 dark:text-slate-500 font-semibold">— jika lulus standard</span></span><br>
+            <span class="flow-loop"><i class="fa-solid fa-rotate-left"></i> Tidak → ulangi latihan</span>
+          </div>
+          <div class="flex gap-4">
+            <div class="flow-num">2</div>
+            <div class="flex-1 rounded-xl border-2 border-atmi-600/40 dark:border-cyan-400/40 bg-atmi-600/5 dark:bg-cyan-400/5 p-4">
+              <p class="font-display font-bold">Produksi — Twist Drill</p>
+              <ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan dengan <b>estimasi 25 menit</b>.</li>
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan dengan tuntutan sesuai standard.</li>
+              </ul>
+            </div>
+          </div>
+          <button data-module="vitax" class="module-open-btn mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-atmi-600 px-5 py-3 font-semibold text-white shadow-lg shadow-atmi-600/30 transition hover:bg-atmi-700 hover:-translate-y-0.5 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400">
+            <i class="fa-solid fa-book-open"></i> Buka Modul Lengkap Vitax
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== PANEL GRIEF ===== -->
+      <div id="panel-grief" class="tab-panel hidden mt-6 grid lg:grid-cols-5 gap-5">
+        <div class="lg:col-span-2 space-y-5">
+          <div class="glass rounded-2xl p-6">
+            <span class="kicker">Identitas Mesin</span>
+            <h4 class="mt-2 font-display font-bold text-xl">Mesin Grief — Pahat R2020</h4>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="chip font-mono2"><i class="fa-solid fa-location-dot text-atmi-600 dark:text-cyan-300"></i> 05.02</span>
+              <span class="chip"><i class="fa-solid fa-stopwatch text-amber-500"></i> Estimasi 40 menit / pcs</span>
+            </div>
+            <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Mengerjakan latihan sesuai standard.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Siapkan <b>hairline</b>; pahat produksi <b class="text-rose-600 dark:text-rose-400">dari kamar alat</b>.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Setting <b>bevel transfer 45°</b> untuk ISO 2 R2020, <b>10°</b> untuk ISO 6 R2020.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Mengukur bidang lebar ISO 6 R2020 <b class="text-rose-600 dark:text-rose-400">WAJIB</b> dengan <b>parallel block</b>.</li>
+              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5 text-atmi-600 dark:text-cyan-300"></i>Catat ukuran awal dan <b>lapor start</b> kepada instruktur.</li>
+            </ul>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <span class="kicker">Kompensasi Ringkas</span>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400"><b>Latihan</b> (pahat instruktur R20): FREE &lt; 0,5 mm · batas panjang 2 mm &amp; lebar 1,5 mm · melebihi batas <span class="tag-minus">-7 jam</span>.</p>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400"><b>Produksi</b> (pahat kamar alat R16): FREE &lt; 0,3 mm · batas 1 mm · lebih dari 1 mm <span class="tag-minus">-5 jam</span> berlaku kelipatan.</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 glass rounded-2xl p-6 lg:p-7">
+          <span class="kicker">Alur Penggerindaan</span>
+          <h4 class="mt-2 font-display font-bold text-xl mb-4">ALUR PENGERINDAAN MESIN GREIF</h4>
+          <div class="flex gap-4">
+            <div class="flow-num">1</div>
+            <div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4">
+              <p class="font-display font-bold">Latihan 1 — ISO 2 R20</p>
+              <ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan <b>2 bidang saja</b> (lebar dan panjang luar).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flow-connector">
+            <span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i></span><br>
+            <span class="flow-loop"><i class="fa-solid fa-rotate-left"></i> Tidak → ulangi latihan</span>
+          </div>
+          <div class="flex gap-4">
+            <div class="flow-num">2</div>
+            <div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4">
+              <p class="font-display font-bold">Latihan 2 — ISO 6 R20</p>
+              <ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan <b>2 bidang saja</b> (panjang dan lebar).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flow-connector">
+            <span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i></span><br>
+            <span class="flow-loop"><i class="fa-solid fa-rotate-left"></i> Tidak → ulangi latihan</span>
+          </div>
+          <div class="flex gap-4">
+            <div class="flow-num">3</div>
+            <div class="flex-1 rounded-xl border-2 border-atmi-600/40 dark:border-cyan-400/40 bg-atmi-600/5 dark:bg-cyan-400/5 p-4">
+              <p class="font-display font-bold">Produksi — Greif R16</p>
+              <ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan produksi: <b>2 ISO 6 dan 2 ISO 2</b> (kamar alat R16).</li>
+                <li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Estimasi ISO 6 R2020 <b>40 menit</b>, ISO 2 <b>40 menit</b> — minimal 2 pcs.</li>
+              </ul>
+            </div>
+          </div>
+          <button data-module="grief" class="module-open-btn mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-atmi-600 px-5 py-3 font-semibold text-white shadow-lg shadow-atmi-600/30 transition hover:bg-atmi-700 hover:-translate-y-0.5 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400">
+            <i class="fa-solid fa-book-open"></i> Buka Modul Lengkap Grief
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== PANEL GREAT D1 ===== -->
+      <div id="panel-greatd1" class="tab-panel hidden mt-6 space-y-5">
+        <div class="grid lg:grid-cols-5 gap-5">
+          <div class="lg:col-span-3 glass rounded-2xl p-6 lg:p-7">
+            <span class="kicker">Pengertian &amp; Fungsi</span>
+            <h4 class="mt-2 font-display font-bold text-xl">Mesin Gerinda Great D1</h4>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Salah satu jenis mesin gerinda yang berfungsi sebagai <b>pengerindaan alat potong dengan tuntutan sudut tertentu</b>. Contoh: <b class="font-mono2">ISO 2, ISO 6, Cutter</b>. Mesin utama praktik untuk prodi TMI, RTM, TMK &amp; TRMK.</p>
+            <div class="mt-5 grid sm:grid-cols-2 gap-x-8">
+              <div>
+                <p class="text-xs font-mono2 font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mb-1">Kapasitas Kerja</p>
+                <div class="spec-row"><span>Max diameter cutter (2 center)</span><span class="spec-val">130 mm</span></div>
+                <div class="spec-row"><span>Max jarak center</span><span class="spec-val">250 mm</span></div>
+                <div class="spec-row"><span>Max diameter cutter (fly mounted)</span><span class="spec-val">320 mm</span></div>
+                <div class="spec-row"><span>Lubang tirus spindel kepala pembagi</span><span class="spec-val">MT4 / ISO 4</span></div>
+                <div class="spec-row"><span>Kapasitas maksimum collet</span><span class="spec-val">MT4 / ISO 40 · 22/24 mm</span></div>
+                <div class="spec-row"><span>Tinggi senter kepala pembagi</span><span class="spec-val">95 mm</span></div>
+              </div>
+              <div class="mt-4 sm:mt-0">
+                <p class="text-xs font-mono2 font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mb-1">Spindel &amp; Ukuran Mesin</p>
+                <div class="spec-row"><span>Tenaga spindel motor</span><span class="spec-val">0,75 HP</span></div>
+                <div class="spec-row"><span>Angka putaran motor</span><span class="spec-val">1400 rpm</span></div>
+                <div class="spec-row"><span>Angka putaran spindel</span><span class="spec-val">3750 rpm</span></div>
+                <div class="spec-row"><span>Tinggi mesin</span><span class="spec-val">1450 mm</span></div>
+                <div class="spec-row"><span>Luas lantai mesin + pendingin</span><span class="spec-val">1500 × 850 mm²</span></div>
+                <div class="spec-row"><span>Berat standar</span><span class="spec-val">350 kg</span></div>
+              </div>
+            </div>
+            <p class="mt-4 text-xs font-mono2 font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mb-1">Jangkauan Penyetelan &amp; Jarak Tempuh</p>
+            <div class="grid sm:grid-cols-2 gap-x-8">
+              <div>
+                <div class="spec-row"><span>Jangkauan meja mesin</span><span class="spec-val">250 mm</span></div>
+                <div class="spec-row"><span>Penyetelan pengikat benda</span><span class="spec-val">200 mm</span></div>
+                <div class="spec-row"><span>Eretan melintang</span><span class="spec-val">50 mm</span></div>
+                <div class="spec-row"><span>Eretan vertikal</span><span class="spec-val">50 mm</span></div>
+              </div>
+              <div>
+                <div class="spec-row"><span>Sudut putar meja / column</span><span class="spec-val">360°</span></div>
+                <div class="spec-row"><span>Jangkauan slide maksimum</span><span class="spec-val">100 mm</span></div>
+                <div class="spec-row"><span>Panjang arul spiral (min–max)</span><span class="spec-val">60–100 mm</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 space-y-5">
+            <div class="glass rounded-2xl p-6">
+              <span class="kicker">Bagian Utama Mesin</span>
+              <div class="mt-3 grid sm:grid-cols-2 gap-2.5 text-sm">
+                <div class="chip"><i class="fa-solid fa-gears text-atmi-600 dark:text-cyan-300"></i> Kepala Gerinda</div>
+                <div class="chip"><i class="fa-solid fa-arrows-rotate text-atmi-600 dark:text-cyan-300"></i> Spindle Utama</div>
+                <div class="chip"><i class="fa-solid fa-lightbulb text-atmi-600 dark:text-cyan-300"></i> Lampu · 12 V / 55 W</div>
+                <div class="chip"><i class="fa-solid fa-layer-group text-atmi-600 dark:text-cyan-300"></i> Kepala Lepas (3 sumbu)</div>
+                <div class="chip"><i class="fa-solid fa-grip-lines text-atmi-600 dark:text-cyan-300"></i> Bed Mesin</div>
+                <div class="chip"><i class="fa-solid fa-sliders text-atmi-600 dark:text-cyan-300"></i> Unit Pengendali</div>
+                <div class="chip"><i class="fa-solid fa-link text-atmi-600 dark:text-cyan-300"></i> Transmisi Sabuk</div>
+                <div class="chip"><i class="fa-solid fa-fan text-atmi-600 dark:text-cyan-300"></i> Blower</div>
+              </div>
+              <ul class="mt-4 space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                <li><i class="fa-solid fa-circle-check mr-1.5 text-atmi-600 dark:text-cyan-300"></i><b>Spindle utama</b> = bagian terpenting, tempat berputarnya batu gerinda.</li>
+                <li><i class="fa-solid fa-circle-check mr-1.5 text-atmi-600 dark:text-cyan-300"></i><b>Kepala lepas</b> memiliki sumbu putar atas, tengah &amp; bawah.</li>
+                <li><i class="fa-solid fa-circle-check mr-1.5 text-atmi-600 dark:text-cyan-300"></i><b>Bed mesin</b> = landasan luncur kepala lepas + referensi kesejajaran.</li>
+                <li><i class="fa-solid fa-circle-check mr-1.5 text-atmi-600 dark:text-cyan-300"></i><b>Unit pengendali</b>: tombol darurat, putar/stop spindel (searah &amp; berlawanan jarum jam), penyedot debu, pendingin, saklar utama.</li>
+              </ul>
+            </div>
+            <div class="glass rounded-2xl p-6">
+              <span class="kicker">Perlengkapan Tambahan</span>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="chip">Vice</span><span class="chip">Bevel Transfer</span><span class="chip">Wheel Mounting</span>
+                <span class="chip">Bevel Protractor</span><span class="chip">Parallel Block</span><span class="chip">Indexing Head &amp; Ring</span>
+                <span class="chip">Centre Guide</span><span class="chip">Tilting Plate</span><span class="chip">Generating Disc Kit</span>
+                <span class="chip">Auxiliary Change Gear System</span><span class="chip">Spiral Grinding Attachment</span>
+                <span class="chip">Spring Collet</span><span class="chip">Taper Adaptor Sleeve / Arbor</span><span class="chip">Adjustable Wheel Guard</span><span class="chip">Spanner</span>
+              </div>
+              <p class="mt-4 text-xs font-mono2 font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mb-2">Batu Gerinda yang Digunakan</p>
+              <div class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                <p><b>1. Cup Wheels</b> — penggerindaan alat-alat potong seperti cutter &amp; pahat bubut.</p>
+                <p><b>2. Dish Grinding Wheels</b> — penggerindaan profil pada cutter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-5">
+          <div class="lg:col-span-3 glass rounded-2xl p-6 lg:p-7">
+            <span class="kicker">Alur Penggerindaan</span>
+            <h4 class="mt-2 font-display font-bold text-xl mb-4">ALUR PENGERINDAAN MESIN GREAT D1</h4>
+            <div class="flex gap-4"><div class="flow-num">1</div><div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4"><p class="font-display font-bold">Latihan 1 — ISO 6 R16</p><ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1"><li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Pahat kamar alat R16 · mengerjakan 2 latihan · semua bidang.</li></ul></div></div>
+            <div class="flow-connector"><span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i></span><br><span class="flow-loop"><i class="fa-solid fa-rotate-left"></i> Tidak → ulangi latihan</span></div>
+            <div class="flex gap-4"><div class="flow-num">2</div><div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4"><p class="font-display font-bold">C 1 — ISO 6 R16 <span class="ml-1 text-[10px] font-mono2 px-1.5 py-0.5 rounded bg-atmi-600/15 text-atmi-700 dark:text-cyan-300 align-middle">KOMPETENSI</span></p><ul class="mt-2 text-sm text-slate-600 dark:text-slate-400"><li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Pahat instruktur R16.</li></ul></div></div>
+            <div class="flow-connector"><span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i></span></div>
+            <div class="flex gap-4"><div class="flow-num">3</div><div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4"><p class="font-display font-bold">Latihan 2 — ISO 2 R16</p><ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1"><li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Pahat kamar alat R16 · mengerjakan 2 latihan · semua bidang.</li></ul></div></div>
+            <div class="flow-connector"><span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i></span><br><span class="flow-loop"><i class="fa-solid fa-rotate-left"></i> Tidak → ulangi latihan</span></div>
+            <div class="flex gap-4"><div class="flow-num">4</div><div class="flex-1 rounded-xl border border-slate-200/80 dark:border-slate-700/70 bg-white/50 dark:bg-slate-900/40 p-4"><p class="font-display font-bold">C 2 — ISO 2 R16 <span class="ml-1 text-[10px] font-mono2 px-1.5 py-0.5 rounded bg-atmi-600/15 text-atmi-700 dark:text-cyan-300 align-middle">KOMPETENSI</span></p><ul class="mt-2 text-sm text-slate-600 dark:text-slate-400"><li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Pahat instruktur R16.</li></ul></div></div>
+            <div class="flow-connector"><span class="inline-flex items-center gap-2 text-xs font-bold"><span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Ya</span><i class="fa-solid fa-arrow-down-long"></i></span></div>
+            <div class="flex gap-4"><div class="flow-num">5</div><div class="flex-1 rounded-xl border-2 border-atmi-600/40 dark:border-cyan-400/40 bg-atmi-600/5 dark:bg-cyan-400/5 p-4"><p class="font-display font-bold">Produksi — ISO 6 &amp; ISO 2</p><ul class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1"><li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Mengerjakan semua bidang.</li><li><i class="fa-solid fa-angle-right text-atmi-600 dark:text-cyan-300 mr-1.5"></i>Estimasi ISO 6 R1616 <b>40 menit</b>, ISO 2 <b>60 menit</b> — minimal 2 pcs.</li></ul></div></div>
+          </div>
+
+          <div class="lg:col-span-2 space-y-5">
+            <div class="glass rounded-2xl p-6">
+              <span class="kicker">Wajib Diperhatikan</span>
+              <ul class="mt-3 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+                <li class="flex gap-2.5"><i class="fa-solid fa-triangle-exclamation mt-0.5 text-amber-500"></i>Mem persiapkan <b>hairline</b>; pahat latihan &amp; produksi <b class="text-rose-600 dark:text-rose-400">dari kamar alat</b>.</li>
+                <li class="flex gap-2.5"><i class="fa-solid fa-triangle-exclamation mt-0.5 text-amber-500"></i>Mengukur bidang lebar ISO 6 R1616 <b class="text-rose-600 dark:text-rose-400">WAJIB</b> dengan <b>parallel block</b>; ISO 2 R1616 diukur dengan <b>bevel transfer</b> pada bagian yang bercahaya.</li>
+                <li class="flex gap-2.5"><i class="fa-solid fa-triangle-exclamation mt-0.5 text-amber-500"></i>Jika ingin kompetensi, <b>sumbu putar Atas, Tengah, dan Bawah harus posisi 0°</b>.</li>
+                <li class="flex gap-2.5"><i class="fa-solid fa-triangle-exclamation mt-0.5 text-amber-500"></i>Pemasangan batu gerinda diamond harus <b>benar</b>.</li>
+              </ul>
+            </div>
+            <div class="glass rounded-2xl p-6">
+              <span class="kicker">Jenis Alat Potong yang Dihasilkan</span>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="chip font-mono2">ISO 6</span><span class="chip font-mono2">ISO 2</span><span class="chip font-mono2">ISO 9</span>
+                <span class="chip">Pahat Ulir Metris HSS 60°</span><span class="chip">Pahat Undercut</span>
+                <span class="chip">End Mill Cutter (Roughing &amp; Finishing)</span><span class="chip">Shell End Mill Cutter</span>
+              </div>
+            </div>
+            <div class="glass rounded-2xl p-6">
+              <span class="kicker">Kompensasi Ringkas</span>
+              <p class="mt-3 text-sm text-slate-600 dark:text-slate-400"><b class="tag-free">FREE</b> pengurangan &lt; 0,3 mm · 0,3–0,8 mm <span class="tag-minus">-1 jam</span> · 0,8–1 mm <span class="tag-minus">-1 jam</span> · batas tebal/lebar/panjang <b>1 mm</b> · lebih dari 1 mm <span class="tag-minus">-5 jam</span> berlaku kelipatannya.</p>
+            </div>
+          </div>
+        </div>
+
+        <button data-module="greatd1" class="module-open-btn w-full inline-flex items-center justify-center gap-2 rounded-xl bg-atmi-600 px-5 py-3.5 font-semibold text-white shadow-lg shadow-atmi-600/30 transition hover:bg-atmi-700 hover:-translate-y-0.5 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400">
+          <i class="fa-solid fa-book-open"></i> Buka Modul Lengkap Great D1
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOLERANSI & NILAI ================= -->
+<section id="toleransi-nilai" class="relative py-20 lg:py-24">
+  <i class="fa-solid fa-gear gear-deco text-[260px] bottom-0 right-4 hidden lg:block" aria-hidden="true"></i>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal">
+      <span class="kicker">04 · Toleransi &amp; Nilai</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Sistem Penilaian, Toleransi &amp; Kompensasi</h2>
+      <p class="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">Pahami tuntutan ukuran &amp; kehalusan, bobot penilaian tiap prodi, hingga denda waktu (jam) akibat pengurangan material melebihi batas.</p>
+    </div>
+
+    <!-- Toleransi -->
+    <div class="mt-10 grid lg:grid-cols-2 gap-5">
+      <div class="glass rounded-2xl p-6 lg:p-7 reveal">
+        <h3 class="font-display font-bold text-lg flex items-center gap-2.5"><i class="fa-solid fa-ruler text-atmi-600 dark:text-cyan-300"></i> Penjelasan Toleransi</h3>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left text-xs font-mono2 uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <th class="py-2 pr-4">Kategori</th><th class="py-2 pr-4">Ukuran</th><th class="py-2">Kehalusan</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200/70 dark:divide-slate-700/70">
+              <tr><td class="py-2.5 pr-4 font-bold">Umum</td><td class="py-2.5 pr-4 font-mono2 font-bold text-atmi-700 dark:text-cyan-300">10, 4, 1</td><td class="py-2.5 font-mono2 font-bold text-atmi-700 dark:text-cyan-300">10, 5, 1</td></tr>
+              <tr><td class="py-2.5 pr-4 font-bold">Khusus</td><td class="py-2.5 pr-4 font-mono2 font-bold text-atmi-700 dark:text-cyan-300">10, 1</td><td class="py-2.5 font-mono2 font-bold text-atmi-700 dark:text-cyan-300">10, 1</td></tr>
+              <tr><td class="py-2.5 pr-4 font-bold">ISO</td><td class="py-2.5 pr-4 font-mono2 font-bold text-atmi-700 dark:text-cyan-300">10, 0</td><td class="py-2.5 font-mono2 font-bold text-atmi-700 dark:text-cyan-300">10, 1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-6 lg:p-7 reveal" style="transition-delay:.08s">
+        <h3 class="font-display font-bold text-lg flex items-center gap-2.5"><i class="fa-solid fa-drafting-compass text-atmi-600 dark:text-cyan-300"></i> Ilustrasi Tiga Jenis Toleransi</h3>
+        <div class="mt-4 grid sm:grid-cols-3 gap-4 text-slate-600 dark:text-slate-400">
+          <div class="text-center">
+            <svg viewBox="0 0 220 92" class="w-full h-20" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="14" y="20" width="158" height="52"/>
+              <rect x="126" y="12" width="46" height="14" stroke-width="1.2"/>
+              <text x="149" y="22" font-size="8" text-anchor="middle" fill="currentColor" stroke="none">Std. Nr.</text>
+              <line x1="184" y1="20" x2="184" y2="72" stroke-width="1"/><line x1="178" y1="20" x2="190" y2="20" stroke-width="1"/><line x1="178" y1="72" x2="190" y2="72" stroke-width="1"/>
+              <text x="192" y="50" font-size="10" fill="currentColor" stroke="none">32</text>
+            </svg>
+            <p class="mt-1 text-xs font-bold">Toleransi Umum</p>
+          </div>
+          <div class="text-center">
+            <svg viewBox="0 0 220 92" class="w-full h-20" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="14" y="20" width="158" height="52"/>
+              <line x1="184" y1="20" x2="184" y2="72" stroke-width="1"/><line x1="178" y1="20" x2="190" y2="20" stroke-width="1"/><line x1="178" y1="72" x2="190" y2="72" stroke-width="1"/>
+              <text x="192" y="50" font-size="9" fill="currentColor" stroke="none">32</text>
+              <text x="192" y="61" font-size="7" fill="currentColor" stroke="none">±0.1</text>
+            </svg>
+            <p class="mt-1 text-xs font-bold">Toleransi Khusus</p>
+          </div>
+          <div class="text-center">
+            <svg viewBox="0 0 220 92" class="w-full h-20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 72 V40 H90 V24 H150 V40 H200 V72 Z"/>
+              <line x1="90" y1="24" x2="90" y2="72" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="52" y="58" font-size="9" text-anchor="middle" fill="currentColor" stroke="none">22±0.1</text>
+              <text x="122" y="16" font-size="9" text-anchor="middle" fill="currentColor" stroke="none">25-h8</text>
+              <text x="176" y="34" font-size="8" fill="currentColor" stroke="none">28 +0.2/-0.1</text>
+            </svg>
+            <p class="mt-1 text-xs font-bold">Toleransi ISO</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bobot penilaian -->
+    <div class="mt-5 grid lg:grid-cols-2 gap-5">
+      <div class="glass card-lift rounded-2xl p-6 lg:p-7 reveal">
+        <h3 class="font-display font-bold text-lg">Nilai Section Gerinda — Prodi TPM &amp; PM <span class="text-slate-400 font-mono2 text-sm">(NHP)</span></h3>
+        <div class="mt-4 flex items-center gap-6">
+          <div class="donut donut-70" role="img" aria-label="Kompetensi 70 persen, produksi 30 persen"></div>
+          <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-400">
+            <li><span class="inline-block w-3 h-3 rounded-sm bg-atmi-600 dark:bg-cyan-400 mr-2"></span>Nilai Kompetensi <b class="font-mono2">70%</b></li>
+            <li><span class="inline-block w-3 h-3 rounded-sm bg-amber-500 mr-2"></span>Nilai Produksi <b class="font-mono2">30%</b></li>
+          </ul>
+        </div>
+        <p class="mt-4 rounded-xl bg-atmi-600/10 dark:bg-cyan-400/10 border border-atmi-600/25 dark:border-cyan-400/25 p-3.5 font-mono2 text-sm font-bold text-atmi-700 dark:text-cyan-300">
+          NSP TGR = (2·NHP + 1·NES) / 3
+        </p>
+      </div>
+
+      <div class="glass card-lift rounded-2xl p-6 lg:p-7 reveal" style="transition-delay:.08s">
+        <h3 class="font-display font-bold text-lg">Nilai Section Gerinda — TMI &amp; RTM <span class="text-slate-400 font-mono2 text-sm">(NHP)</span></h3>
+        <div class="mt-4 flex items-center gap-6">
+          <div class="donut donut-100" role="img" aria-label="Produksi 100 persen"></div>
+          <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-400">
+            <li><span class="inline-block w-3 h-3 rounded-sm bg-atmi-600 dark:bg-cyan-400 mr-2"></span>Nilai Produksi <b class="font-mono2">100%</b></li>
+            <li class="text-xs text-slate-500 dark:text-slate-500">Berlaku juga untuk TMK &amp; TRMK.</li>
+          </ul>
+        </div>
+        <p class="mt-4 rounded-xl bg-atmi-600/10 dark:bg-cyan-400/10 border border-atmi-600/25 dark:border-cyan-400/25 p-3.5 font-mono2 text-sm font-bold text-atmi-700 dark:text-cyan-300">
+          NSP TGR = (1·NHP + 1·NES) / 2
+        </p>
+      </div>
+    </div>
+    <div class="mt-5 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 flex gap-3 reveal">
+      <i class="fa-solid fa-circle-info text-amber-500 mt-0.5"></i>
+      <p class="text-sm text-slate-700 dark:text-slate-300"><b>NB:</b> Perbaikan nilai <b>HANYA untuk nilai produksi</b> (kuantitas dan nilainya).</p>
+    </div>
+
+    <!-- Kompensasi -->
+    <div class="mt-16 reveal">
+      <h3 class="font-display text-2xl font-bold flex items-center gap-3"><i class="fa-solid fa-hourglass-half text-atmi-600 dark:text-cyan-300"></i> Aturan Kompensasi — Denda Waktu / Jam</h3>
+      <div class="mt-6 grid lg:grid-cols-3 gap-5">
+        <!-- Great D1 -->
+        <article class="glass card-lift rounded-2xl p-6 reveal">
+          <h4 class="font-display font-bold text-lg">Great D1</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Berlaku untuk latihan &amp; produksi (pahat kamar alat R16)</p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b class="tag-free">FREE</b> pengurangan kurang dari <b>0,3 mm</b></span></li>
+            <li class="m-row"><i class="fa-solid fa-circle-minus text-rose-500 mt-0.5"></i><span>Pengurangan 0,3 – 0,8 mm : <b class="tag-minus">-1 jam</b></span></li>
+            <li class="m-row"><i class="fa-solid fa-circle-minus text-rose-500 mt-0.5"></i><span>Pengurangan 0,8 – 1 mm : <b class="tag-minus">-1 jam</b></span></li>
+            <li class="m-row"><i class="fa-solid fa-ruler-vertical text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Batas pengurangan tebal, lebar &amp; panjang <b>1 mm</b></span></li>
+            <li class="m-row"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i><span>Lebih dari 1 mm : <b class="tag-minus">-5 jam</b> berlaku kelipatannya</span></li>
+          </ul>
+        </article>
+        <!-- Grief -->
+        <article class="glass card-lift rounded-2xl p-6 reveal" style="transition-delay:.08s">
+          <h4 class="font-display font-bold text-lg">Grief</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Latihan &amp; produksi berbeda ketentuan</p>
+          <div class="mt-4 space-y-4">
+            <div>
+              <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-2">Latihan · Pahat Instruktur R20</p>
+              <ul class="space-y-2 text-sm">
+                <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b class="tag-free">FREE</b> kurang dari <b>0,5 mm</b></span></li>
+                <li class="m-row"><i class="fa-solid fa-circle-minus text-rose-500 mt-0.5"></i><span>0,5–1 mm : <b class="tag-minus">-1 jam</b> · 1–1,5 mm : <b class="tag-minus">-1 jam</b> · 1,5–2 mm : <b class="tag-minus">-1 jam</b></span></li>
+                <li class="m-row"><i class="fa-solid fa-ruler-vertical text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Batas panjang <b>2 mm</b> &amp; lebar <b>1,5 mm</b> · melebihi batas <b class="tag-minus">-7 jam</b></span></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-2">Produksi · Pahat Kamar Alat R16</p>
+              <ul class="space-y-2 text-sm">
+                <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b class="tag-free">FREE</b> kurang dari <b>0,3 mm</b> · 0,3–0,8 &amp; 0,8–1 mm : <b class="tag-minus">-1 jam</b></span></li>
+                <li class="m-row"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i><span>Batas <b>1 mm</b> · lebih dari 1 mm <b class="tag-minus">-5 jam</b> kelipatan</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <!-- Vitax -->
+        <article class="glass card-lift rounded-2xl p-6 reveal" style="transition-delay:.16s">
+          <h4 class="font-display font-bold text-lg">Vitax</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Twistdrill latihan dari instruktur · produksi dari kamar alat</p>
+          <div class="mt-4 space-y-4">
+            <div>
+              <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-2">Latihan</p>
+              <ul class="space-y-2 text-sm">
+                <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b class="tag-free">FREE</b> kompensasi — <b>boleh dihabiskan</b></span></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-2">Produksi</p>
+              <ul class="space-y-2 text-sm">
+                <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b class="tag-free">FREE</b> pengurangan <b>5 mm pertama</b></span></li>
+                <li class="m-row"><i class="fa-solid fa-circle-minus text-rose-500 mt-0.5"></i><span>Pengurangan &gt; 5 mm : <b class="tag-minus">-1 jam per kelipatan 3 mm</b></span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Kalkulator NSP -->
+    <div class="mt-16 glass rounded-2xl p-6 lg:p-8 reveal" id="nspCalc">
+      <h3 class="font-display text-2xl font-bold flex items-center gap-3"><i class="fa-solid fa-calculator text-atmi-600 dark:text-cyan-300"></i> Kalkulator NSP TGR</h3>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Simulasi cepat perhitungan nilai akhir section gerinda berdasarkan rumus resmi.</p>
+      <div class="mt-6 grid lg:grid-cols-2 gap-8">
+        <div>
+          <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-2">Pilih Program Studi</p>
+          <div class="grid grid-cols-2 gap-3 seg-radio">
+            <label><input type="radio" name="prodiOpt" value="tpm" checked><span><i class="fa-solid fa-graduation-cap"></i> TPM / PM</span></label>
+            <label><input type="radio" name="prodiOpt" value="tmi"><span><i class="fa-solid fa-users-gear"></i> TMI / RTM / TMK / TRMK</span></label>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-4 mt-5">
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400">Kompetensi (0–100)
+              <input id="inKomp" type="number" min="0" max="100" value="80" class="calc-input mt-1.5">
+            </label>
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400">Produksi (0–100)
+              <input id="inProd" type="number" min="0" max="100" value="85" class="calc-input mt-1.5">
+            </label>
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400">NES (0–100)
+              <input id="inNes" type="number" min="0" max="100" value="85" class="calc-input mt-1.5">
+            </label>
+          </div>
+          <p id="calcNote" class="mt-3 text-xs text-slate-500 dark:text-slate-400"><i class="fa-solid fa-circle-info mr-1.5 text-atmi-600 dark:text-cyan-300"></i>Nilai Kompetensi hanya berlaku untuk prodi TPM &amp; PM (bobot 70% kompetensi : 30% produksi).</p>
+        </div>
+        <div class="rounded-2xl border border-atmi-600/25 dark:border-cyan-400/25 bg-atmi-600/5 dark:bg-cyan-400/5 p-6 flex flex-col justify-center">
+          <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">NHP (Nilai Hasil Praktik)</p>
+          <p id="outNhp" class="font-mono2 font-bold text-2xl text-atmi-700 dark:text-cyan-300 mt-1">82.50</p>
+          <p class="text-xs font-mono2 font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mt-5">NSP TGR (Nilai Akhir)</p>
+          <p class="flex items-baseline gap-2">
+            <span id="outNsp" class="font-display font-bold text-6xl text-atmi-600 dark:text-cyan-300 inline-block">83.33</span>
+            <span class="text-sm text-slate-400 font-mono2">/ 100</span>
+          </p>
+          <p id="outFormula" class="mt-4 text-[11px] font-mono2 text-slate-500 dark:text-slate-400 leading-relaxed">NHP = 70% × Kompetensi + 30% × Produksi · NSP TGR = (2·NHP + 1·NES) / 3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTRUKTUR ================= -->
+<section id="instruktur" class="relative py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal text-center">
+      <span class="kicker justify-center">05 · Tim Instruktur</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-bold tracking-tight">Tim Instruktur Pendamping Praktik TGr</h2>
+      <p class="mt-3 max-w-2xl mx-auto text-slate-600 dark:text-slate-400">Pendamping praktik, penilai kompetensi, dan pembina budaya K3 di Section Tool Grinding.</p>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <article class="glass card-lift rounded-3xl p-7 text-center reveal">
+        <div class="relative w-28 h-28 mx-auto">
+          <div class="w-28 h-28 rounded-full grid place-items-center bg-atmi-700 dark:bg-cyan-500/20 border-4 border-white dark:border-slate-700 shadow-xl shadow-atmi-700/25 dark:shadow-cyan-400/20 font-display font-bold text-3xl text-white dark:text-cyan-300">YO</div>
+          <span class="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 grid place-items-center text-atmi-600 dark:text-cyan-300 shadow"><i class="fa-solid fa-user-gear text-sm"></i></span>
+        </div>
+        <h3 class="mt-5 font-display font-bold text-xl">Y. Oscar Andrian</h3>
+        <span class="mt-3 inline-block rounded-full border border-atmi-600/30 dark:border-cyan-400/30 bg-atmi-600/10 dark:bg-cyan-400/10 px-3.5 py-1.5 text-[11px] font-bold text-atmi-700 dark:text-cyan-300 leading-snug">
+          <i class="fa-solid fa-helmet-safety mr-1"></i>Instruktur Workshop Tool Grinding — Politeknik ATMI Surakarta
+        </span>
+      </article>
+
+      <article class="glass card-lift rounded-3xl p-7 text-center reveal" style="transition-delay:.08s">
+        <div class="relative w-28 h-28 mx-auto">
+          <div class="w-28 h-28 rounded-full grid place-items-center bg-atmi-800 dark:bg-cyan-500/20 border-4 border-white dark:border-slate-700 shadow-xl shadow-atmi-800/25 dark:shadow-cyan-400/20 font-display font-bold text-3xl text-white dark:text-cyan-300">CW</div>
+          <span class="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 grid place-items-center text-atmi-600 dark:text-cyan-300 shadow"><i class="fa-solid fa-user-gear text-sm"></i></span>
+        </div>
+        <h3 class="mt-5 font-display font-bold text-xl">C. Widyasmara</h3>
+        <span class="mt-3 inline-block rounded-full border border-atmi-600/30 dark:border-cyan-400/30 bg-atmi-600/10 dark:bg-cyan-400/10 px-3.5 py-1.5 text-[11px] font-bold text-atmi-700 dark:text-cyan-300 leading-snug">
+          <i class="fa-solid fa-helmet-safety mr-1"></i>Instruktur Workshop Tool Grinding — Politeknik ATMI Surakarta
+        </span>
+      </article>
+
+      <article class="glass card-lift rounded-3xl p-7 text-center reveal sm:col-span-2 lg:col-span-1" style="transition-delay:.16s">
+        <div class="relative w-28 h-28 mx-auto">
+          <div class="w-28 h-28 rounded-full grid place-items-center bg-atmi-600 dark:bg-cyan-500/20 border-4 border-white dark:border-slate-700 shadow-xl shadow-atmi-600/25 dark:shadow-cyan-400/20 font-display font-bold text-3xl text-white dark:text-cyan-300">AW</div>
+          <span class="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 grid place-items-center text-atmi-600 dark:text-cyan-300 shadow"><i class="fa-solid fa-user-gear text-sm"></i></span>
+        </div>
+        <h3 class="mt-5 font-display font-bold text-xl">Andri Wibowo</h3>
+        <span class="mt-3 inline-block rounded-full border border-atmi-600/30 dark:border-cyan-400/30 bg-atmi-600/10 dark:bg-cyan-400/10 px-3.5 py-1.5 text-[11px] font-bold text-atmi-700 dark:text-cyan-300 leading-snug">
+          <i class="fa-solid fa-helmet-safety mr-1"></i>Instruktur Workshop Tool Grinding — Politeknik ATMI Surakarta
+        </span>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="relative mt-8 border-t border-slate-200/70 dark:border-slate-700/60">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid md:grid-cols-3 gap-10">
+    <div>
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 64 64" class="w-10 h-10" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#0369a1"/>
+          <circle cx="32" cy="32" r="25" fill="none" stroke="#e0f2fe" stroke-width="5" stroke-dasharray="5.5 4.5"/>
+          <circle cx="32" cy="32" r="18" fill="#0c4a6e"/>
+          <text x="32" y="31" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" font-family="Chakra Petch, sans-serif">ATMI</text>
+          <text x="32" y="41" text-anchor="middle" font-size="7" fill="#7dd3fc" font-family="JetBrains Mono, monospace">1968</text>
+        </svg>
+        <p class="font-display font-bold leading-tight">Section Tool Grinding<br><span class="text-atmi-600 dark:text-cyan-300">Politeknik ATMI Surakarta</span></p>
+      </div>
+      <p class="mt-4 text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Dashboard &amp; modul edukasi praktik Tool Grinding — panduan komprehensif bagi mahasiswa sebelum dan selama melaksanakan Praktik TGr.</p>
+    </div>
+    <div>
+      <p class="font-mono2 text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">Navigasi Cepat</p>
+      <ul class="mt-4 grid grid-cols-2 gap-2 text-sm font-semibold">
+        <li><a class="hover:text-atmi-600 dark:hover:text-cyan-300 transition" href="#overview">Overview</a></li>
+        <li><a class="hover:text-atmi-600 dark:hover:text-cyan-300 transition" href="#aturan-k3">Aturan &amp; K3</a></li>
+        <li><a class="hover:text-atmi-600 dark:hover:text-cyan-300 transition" href="#mesin-modul">Mesin &amp; Modul</a></li>
+        <li><a class="hover:text-atmi-600 dark:hover:text-cyan-300 transition" href="#toleransi-nilai">Toleransi &amp; Nilai</a></li>
+        <li><a class="hover:text-atmi-600 dark:hover:text-cyan-300 transition" href="#instruktur">Instruktur</a></li>
+        <li><a class="hover:text-atmi-600 dark:hover:text-cyan-300 transition" href="#top">Kembali ke Atas</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-mono2 text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">Slogan Section</p>
+      <div class="mt-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-5">
+        <p class="font-display font-bold text-lg tracking-wide text-slate-800 dark:text-amber-200">"GERINDA ITU GAYENG — FULL SENYUM 😊"</p>
+        <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Semangat, disiplin, dan senyum selama praktik!</p>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-slate-200/70 dark:border-slate-700/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+      <p>Copyright © <span id="year">2025</span> Politeknik ATMI Surakarta — Section Tool Grinding.</p>
+      <p class="font-mono2">Dibangun untuk kemudahan mahasiswa praktik TGr · Workshop 05</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Tombol kembali ke atas -->
+<button id="toTop" class="hidden fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass grid place-items-center text-atmi-700 dark:text-cyan-300 hover:-translate-y-1 transition" aria-label="Kembali ke atas">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" class="fixed inset-0 z-[80] hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="modalOverlay" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+  <div class="absolute inset-0 overflow-y-auto p-4 sm:p-8 flex items-start sm:items-center justify-center">
+    <div class="modal-panel relative w-full max-w-3xl glass rounded-3xl overflow-hidden">
+      <div class="flex items-start gap-4 p-6 border-b border-slate-200/70 dark:border-slate-700/60">
+        <div class="icon-tile shrink-0"><i id="modalIcon" class="fa-solid fa-circle-info"></i></div>
+        <div class="min-w-0 flex-1">
+          <span id="modalTag" class="kicker"></span>
+          <h3 id="modalTitle" class="font-display text-xl sm:text-2xl font-bold mt-1 leading-snug"></h3>
+        </div>
+        <button id="modalClose" class="shrink-0 w-10 h-10 rounded-xl grid place-items-center border border-slate-300/70 dark:border-slate-600 hover:bg-rose-500/10 hover:text-rose-500 hover:border-rose-500/40 transition" aria-label="Tutup modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="modalBody" class="p-6 max-h-[68vh] overflow-y-auto"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   1. TEMA (LIGHT / DARK) + LOCALSTORAGE
+===================================================== */
+(function(){
+  const root=document.documentElement, btn=document.getElementById('themeToggle'), knob=document.getElementById('themeKnob');
+  function ui(){
+    const dark=root.classList.contains('dark');
+    btn.setAttribute('aria-checked',dark?'true':'false');
+    knob.style.transform=dark?'translateX(28px)':'translateX(0px)';
+  }
+  btn.addEventListener('click',()=>{
+    root.classList.toggle('dark');
+    try{ localStorage.setItem('tgr-theme',root.classList.contains('dark')?'dark':'light'); }catch(e){}
+    ui();
+  });
+  ui();
+})();
+
+/* =====================================================
+   2. MENU MOBILE
+===================================================== */
+(function(){
+  const btn=document.getElementById('menuBtn'), menu=document.getElementById('mobileMenu');
+  btn.addEventListener('click',()=>{
+    menu.classList.toggle('hidden');
+    btn.querySelector('i').className=menu.classList.contains('hidden')?'fa-solid fa-bars':'fa-solid fa-xmark';
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    menu.classList.add('hidden');
+    btn.querySelector('i').className='fa-solid fa-bars';
+  }));
+})();
+
+/* =====================================================
+   3. SCROLL: PROGRESS, SHADOW HEADER, SCROLLSPY, TO-TOP
+===================================================== */
+(function(){
+  const prog=document.getElementById('scrollProgress'), header=document.querySelector('.glass-header'), toTop=document.getElementById('toTop');
+  const sections=[...document.querySelectorAll('section[id]')];
+  const links=[...document.querySelectorAll('.nav-link')];
+  function onScroll(){
+    const st=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(dh>0?(st/dh*100):0)+'%';
+    header.classList.toggle('scrolled',st>10);
+    toTop.classList.toggle('hidden',st<600);
+    let cur='top';
+    sections.forEach(s=>{ if(st+150>=s.offsetTop) cur=s.id; });
+    links.forEach(a=>a.classList.toggle('nav-active',a.getAttribute('href')==='#'+cur));
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+
+/* =====================================================
+   4. REVEAL SAAT SCROLL
+===================================================== */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* =====================================================
+   5. TAB EXPLORER MESIN
+===================================================== */
+(function(){
+  const btns=document.querySelectorAll('.tab-btn');
+  btns.forEach(btn=>btn.addEventListener('click',()=>{
+    btns.forEach(b=>{ b.classList.remove('tab-active'); b.setAttribute('aria-selected','false'); });
+    btn.classList.add('tab-active'); btn.setAttribute('aria-selected','true');
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.add('hidden'));
+    const panel=document.getElementById('panel-'+btn.dataset.tab);
+    panel.classList.remove('hidden');
+    panel.querySelectorAll('.reveal').forEach(el=>el.classList.add('show'));
+  }));
+})();
+
+/* =====================================================
+   6. MODAL
+===================================================== */
+const modal=document.getElementById('modal'),
+      modalIcon=document.getElementById('modalIcon'),
+      modalTag=document.getElementById('modalTag'),
+      modalTitle=document.getElementById('modalTitle'),
+      modalBody=document.getElementById('modalBody'),
+      modalClose=document.getElementById('modalClose');
+let lastFocus=null;
+
+function setModal(meta,fill){
+  modalIcon.className=meta.icon;
+  modalTag.textContent=meta.tag;
+  modalTitle.textContent=meta.title;
+  modalBody.innerHTML='';
+  fill();
+  lastFocus=document.activeElement;
+  modal.classList.remove('hidden');
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>modal.classList.add('open')));
+  modalClose.focus();
+}
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{ modal.classList.add('hidden'); modalBody.innerHTML=''; },280);
+  if(lastFocus&&lastFocus.focus) lastFocus.focus();
+}
+modalClose.addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{ if(e.target.id==='modalOverlay') closeModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!modal.classList.contains('hidden')) closeModal(); });
+
+/* ---- Data modal aturan ---- */
+const MODALS={
+  aturanMasuk:{
+    icon:'fa-solid fa-door-open',tag:'Aturan & K3',title:'Aturan Masuk & Briefing Workshop',
+    body:`
+      <ul class="space-y-3">
+        <li class="m-row"><i class="fa-solid fa-shower text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Mahasiswa masuk section gerinda dalam kondisi <b>sudah mandi dan rapi</b> — apabila tidak rapi, mahasiswa akan <b class="tag-minus">dipulangkan</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-bullhorn text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span><b>Briefing 5 menit</b> dilaksanakan sebelum jam masuk — wajib hadir tepat waktu.</span></li>
+        <li class="m-row"><i class="fa-solid fa-user-shield text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Instruktur berhak <b>menegur dan mengambil tindakan</b> apabila terdapat ketidaksesuaian dengan aturan section.</span></li>
+      </ul>`
+  },
+  cleaning:{
+    icon:'fa-solid fa-broom',tag:'Aturan & K3',title:'Jadwal Cleaning Workshop',
+    body:`
+      <p class="mb-4 text-sm text-slate-600 dark:text-slate-400">Cleaning merupakan tanggung jawab bersama seluruh mahasiswa praktik dan wajib dilaksanakan sesuai jadwal berikut:</p>
+      <div class="space-y-3">
+        <div class="m-row"><span class="badge-day text-atmi-700 dark:text-cyan-300 border-atmi-600/40">HARIAN</span><span><b>Menyapu lantai workshop</b> setiap hari.</span></div>
+        <div class="m-row"><span class="badge-day text-emerald-600 dark:text-emerald-400 border-emerald-500/40">JUMAT</span><span><b>Mengepel lantai workshop</b> setiap hari Jumat.</span></div>
+        <div class="m-row"><span class="badge-day text-amber-600 dark:text-amber-400 border-amber-500/40">RABU</span><span><b>Menyapu &amp; mengepel lantai kantor</b> setiap hari Rabu, serta <b>mengelap kaca kantor</b> setiap hari Rabu.</span></div>
+        <div class="m-row"><span class="badge-day text-rose-600 dark:text-rose-400 border-rose-500/40">SENIN</span><span><b>Inventarisasi setiap hari Senin</b> dengan <b>scan barcode</b>.</span></div>
+      </div>`
+  },
+  disiplin:{
+    icon:'fa-solid fa-user-shield',tag:'Aturan & K3',title:'Kedisiplinan & Tata Tertib',
+    body:`
+      <ul class="space-y-3">
+        <li class="m-row"><i class="fa-solid fa-helmet-safety text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span><b>Wajib membawa APD lengkap</b> setiap praktik.</span></li>
+        <li class="m-row"><i class="fa-solid fa-mobile-screen text-rose-500 mt-0.5"></i><span><b>HP dilarang digunakan</b> tanpa ijin instruktur.</span></li>
+        <li class="m-row"><i class="fa-solid fa-power-off text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span><b>Matikan mesin, lampu, blower, dan kipas angin</b> ketika istirahat dan pulang.</span></li>
+        <li class="m-row"><i class="fa-solid fa-phone-volume text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Apabila mahasiswa tidak masuk, <b>wajib telepon Kabeng</b> — <b class="tag-minus">tidak telepon = Minus ×2</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-user-shield text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Instruktur berhak <b>menegur dan mengambil tindakan</b> apabila terdapat ketidaksesuaian.</span></li>
+      </ul>`
+  },
+  apd:{
+    icon:'fa-solid fa-helmet-safety',tag:'Aturan & K3',title:'Kelengkapan APD & K3',
+    body:`
+      <ul class="space-y-3">
+        <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span>Memakai <b>wearpack dengan name tag</b> sesuai (rapi dan bersih).</span></li>
+        <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span>Memakai <b>safety shoes</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span>Menggunakan <b>kacamata safety</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b>Membawa dan menggunakan masker</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b>Kuku dan rambut harus pendek</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i><span><b>Rambut berwarna hitam</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i><span><b>Pemasangan batu gerinda diamond dengan benar</b> (Mesin Great D1).</span></li>
+      </ul>`
+  },
+  halPenting:{
+    icon:'fa-solid fa-clipboard-list',tag:'Aturan & K3',title:'Hal yang Perlu Diperhatikan',
+    body:`
+      <ul class="space-y-3">
+        <li class="m-row"><i class="fa-solid fa-bullhorn text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span><b>Wajib lapor</b> ketika meninggalkan mesin.</span></li>
+        <li class="m-row"><i class="fa-solid fa-glass-water text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Boleh membawa air minum, <b>diletakkan pada tempatnya</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-magnifying-glass text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span><b>Cek batu gerinda di awal dan akhir</b> — jika ada yang gempil, silakan lapor.</span></li>
+        <li class="m-row"><i class="fa-solid fa-hourglass-half text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Perhitungan <b>kompensasi di hari Senin</b> setelah praktik selesai.</span></li>
+        <li class="m-row"><i class="fa-solid fa-calendar-check text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span>Maksimal <b>penyelesaian nilai praktik 1 bulan</b> setelah praktik berakhir.</span></li>
+        <li class="m-row"><i class="fa-solid fa-mobile-screen text-rose-500 mt-0.5"></i><span><b>Dilarang menggunakan HP tanpa ijin</b>.</span></li>
+        <li class="m-row"><i class="fa-solid fa-book text-atmi-600 dark:text-cyan-300 mt-0.5"></i><span><b>Pengumpulan logbook pada hari Jumat akhir minggu</b> — <b class="tag-minus">isi sudah lengkap sesuai contoh</b>.</span></li>
+      </ul>`
+  }
+};
+document.querySelectorAll('[data-modal]').forEach(el=>{
+  el.addEventListener('click',()=>{ const m=MODALS[el.dataset.modal]; if(m) setModal(m,()=>{ modalBody.innerHTML=m.body; }); });
+  el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); el.click(); } });
+});
+
+/* ---- Modal modul mesin (ambil isi dari panel tab) ---- */
+const MODULE_META={
+  vitax:{icon:'fa-solid fa-screwdriver-wrench',tag:'Modul Mesin',title:'Modul Lengkap — Mesin Vitax Twistdrill & Roughing'},
+  grief:{icon:'fa-solid fa-compass-drafting',tag:'Modul Mesin',title:'Modul Lengkap — Mesin Grief (Pahat R2020)'},
+  greatd1:{icon:'fa-solid fa-gears',tag:'Modul Mesin',title:'Modul Lengkap — Mesin Gerinda Great D1'}
+};
+document.querySelectorAll('[data-module]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=btn.dataset.module, panel=document.getElementById('panel-'+t);
+    if(!panel||!MODULE_META[t]) return;
+    setModal(MODULE_META[t],()=>{
+      const clone=panel.cloneNode(true);
+      clone.classList.remove('hidden');
+      clone.querySelectorAll('.module-open-btn').forEach(x=>x.remove());
+      clone.querySelectorAll('.reveal').forEach(x=>x.classList.add('show'));
+      modalBody.appendChild(clone);
+    });
+  });
+});
+
+/* =====================================================
+   7. KALKULATOR NSP TGR
+===================================================== */
+(function(){
+  const inKomp=document.getElementById('inKomp'), inProd=document.getElementById('inProd'), inNes=document.getElementById('inNes');
+  const outNhp=document.getElementById('outNhp'), outNsp=document.getElementById('outNsp'), outFormula=document.getElementById('outFormula'), note=document.getElementById('calcNote');
+  if(!inKomp) return;
+  const clamp=v=>Math.min(100,Math.max(0,isFinite(v)?v:0));
+  function recalc(animate){
+    const mode=document.querySelector('input[name="prodiOpt"]:checked').value;
+    const komp=clamp(parseFloat(inKomp.value)), prod=clamp(parseFloat(inProd.value)), nes=clamp(parseFloat(inNes.value));
+    inKomp.disabled=(mode==='tmi');
+    note.innerHTML=(mode==='tpm')
+      ?'<i class="fa-solid fa-circle-info mr-1.5 text-atmi-600 dark:text-cyan-300"></i>Nilai Kompetensi hanya berlaku untuk prodi TPM & PM (bobot 70% kompetensi : 30% produksi).'
+      :'<i class="fa-solid fa-circle-info mr-1.5 text-atmi-600 dark:text-cyan-300"></i>Prodi TMI / RTM / TMK / TRMK: NHP dihitung 100% dari nilai produksi — input Kompetensi diabaikan.';
+    let nhp;
+    if(mode==='tpm'){ nhp=.7*komp+.3*prod; outFormula.textContent='NHP = 70% × Kompetensi + 30% × Produksi · NSP TGR = (2·NHP + 1·NES) / 3'; }
+    else{ nhp=prod; outFormula.textContent='NHP = 100% × Produksi · NSP TGR = (1·NHP + 1·NES) / 2'; }
+    const nsp=(mode==='tpm')?(2*nhp+nes)/3:(nhp+nes)/2;
+    outNhp.textContent=nhp.toFixed(2);
+    outNsp.textContent=nsp.toFixed(2);
+    if(animate){ outNsp.classList.remove('pulse-num'); void outNsp.offsetWidth; outNsp.classList.add('pulse-num'); }
+  }
+  [inKomp,inProd,inNes].forEach(i=>i.addEventListener('input',()=>recalc(true)));
+  document.querySelectorAll('input[name="prodiOpt"]').forEach(r=>r.addEventListener('change',()=>recalc(true)));
+  recalc(false);
+})();
+
+/* =====================================================
+   8. CANVAS — EMBER LATAR HERO
+===================================================== */
+(function(){
+  const cv=document.getElementById('emberCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d'), host=cv.parentElement;
+  let W=0,H=0,DPR=1;
+  function size(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=host.clientWidth; H=host.clientHeight;
+    cv.width=W*DPR; cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  size(); window.addEventListener('resize',size);
+  const P=Array.from({length:26},()=>({
+    x:Math.random(), y:Math.random(),
+    s:.7+Math.random()*1.5, v:.25+Math.random()*.55,
+    d:(Math.random()*2-1)*.12, a:.10+Math.random()*.26,
+    c:Math.random()<.75?'245,180,60':'103,232,249'
+  }));
+  const reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of P){
+      p.y-=p.v/H; p.x+=p.d/W;
+      if(p.y<-.02||p.x<-.02||p.x>1.02){ p.y=1.02; p.x=Math.random(); }
+      ctx.beginPath();
+      ctx.arc(p.x*W,p.y*H,p.s,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.c+','+p.a+')';
+      ctx.fill();
+    }
+    if(!reduced) requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* =====================================================
+   9. CANVAS — SIMULASI GERINDA INTERAKTIF
+   Batu gerinda berputar + pahat bersentuhan + percikan api
+===================================================== */
+(function(){
+  const cv=document.getElementById('grindCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d'), wrap=document.getElementById('canvasWrap');
+  const feedEl=document.getElementById('feedVal'), sparkEl=document.getElementById('sparkCount');
+  let W=0,H=0,DPR=1;
+  function size(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=wrap.clientWidth; H=wrap.clientHeight;
+    cv.width=W*DPR; cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  size(); window.addEventListener('resize',size);
+
+  let feed=.55, tFeed=.55, rot=0;
+  const sparks=[];
+  const COL=['#fff7ed','#fef3c7','#fde68a','#fbbf24','#f97316','#ea580c'];
+
+  /* Interaksi: posisi kursor = laju pemakanan */
+  wrap.addEventListener('pointermove',e=>{
+    const r=wrap.getBoundingClientRect();
+    tFeed=Math.min(1,Math.max(.12,(e.clientX-r.left)/r.width));
+  });
+  wrap.addEventListener('pointerleave',()=>{ tFeed=.55; });
+
+  function emit(px,py,p){
+    if(sparks.length>240) return;
+    const up=Math.random()<.16;
+    sparks.push({
+      x:px+(Math.random()*6-3), y:py+(Math.random()*4-2),
+      vx:(Math.random()*2.6-.8)*(1.3+p*2.4),
+      vy: up ? -(Math.random()*2.2+.5) : (Math.random()*1.5+.4)*(1+p*1.8),
+      g:.11+Math.random()*.06, life:1, dk:.013+Math.random()*.02,
+      w:.7+Math.random()*1.8, c:COL[(Math.random()*COL.length)|0]
+    });
+  }
+  function rr(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);     ctx.arcTo(x,y,x+w,y,r);
+    ctx.closePath();
+  }
+
+  function drawScene(){
+    ctx.clearRect(0,0,W,H);
+    const cx=W*.42, cy=H*.52, R=Math.max(70,Math.min(W,H)*.30);
+    const px=cx+Math.cos(-.14)*R, py=cy+Math.sin(-.14)*R;
+    const pen=2+feed*9;
+
+    /* Penjaga batu gerinda (guard) */
+    ctx.save();
+    ctx.lineCap='round';
+    ctx.strokeStyle='rgba(100,116,139,.45)'; ctx.lineWidth=9;
+    ctx.beginPath(); ctx.arc(cx,cy,R+16,Math.PI*1.06,Math.PI*1.94); ctx.stroke();
+    ctx.strokeStyle='rgba(148,163,184,.35)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(cx,cy,R+23,Math.PI*1.06,Math.PI*1.94); ctx.stroke();
+    ctx.restore();
+
+    /* Badan batu gerinda */
+    const g=ctx.createRadialGradient(cx-R*.35,cy-R*.4,R*.1,cx,cy,R);
+    g.addColorStop(0,'#6b7a90'); g.addColorStop(.55,'#4b5b70'); g.addColorStop(1,'#33415a');
+    ctx.fillStyle=g;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+
+    /* Segmen berputar */
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,R-1,0,Math.PI*2); ctx.clip();
+    ctx.translate(cx,cy); ctx.rotate(rot);
+    const N=30;
+    for(let i=0;i<N;i++){
+      const a=i/N*Math.PI*2;
+      ctx.strokeStyle=i%2?'rgba(226,232,240,.07)':'rgba(226,232,240,.16)';
+      ctx.lineWidth=2;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a)*R*.24,Math.sin(a)*R*.24);
+      ctx.lineTo(Math.cos(a)*R,Math.sin(a)*R);
+      ctx.stroke();
+    }
+    ctx.strokeStyle='rgba(226,232,240,.14)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.arc(0,0,R*.62,0,Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0,0,R*.88,0,Math.PI*2); ctx.stroke();
+    ctx.restore();
+
+    /* Hub & rim */
+    ctx.fillStyle='#111c30';
+    ctx.beginPath(); ctx.arc(cx,cy,R*.17,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#8ea0b8';
+    ctx.beginPath(); ctx.arc(cx,cy,R*.075,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle='rgba(226,232,240,.25)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+
+    /* Pijaran titik kontak */
+    const gr=ctx.createRadialGradient(px,py,0,px,py,24+feed*34);
+    gr.addColorStop(0,'rgba(251,191,36,'+(.45+feed*.4)+')');
+    gr.addColorStop(1,'rgba(249,115,22,0)');
+    ctx.fillStyle=gr;
+    ctx.beginPath(); ctx.arc(px,py,24+feed*34,0,Math.PI*2); ctx.fill();
+
+    /* Dudukan tool holder */
+    ctx.fillStyle='rgba(15,23,42,.85)';
+    rr(W*.74,py-26,W*.24,52,10); ctx.fill();
+    ctx.strokeStyle='rgba(148,163,184,.35)'; ctx.lineWidth=1.5; ctx.stroke();
+
+    /* Pahat (alat potong) menembus sedikit sesuai feed */
+    ctx.save();
+    ctx.translate(px,py); ctx.rotate(.30);
+    ctx.fillStyle='#1f2a3d';
+    rr(8,-13,W*.8,26,5); ctx.fill();
+    ctx.strokeStyle='rgba(148,163,184,.5)'; ctx.lineWidth=1.4; ctx.stroke();
+    ctx.fillStyle='#d7e0ea';
+    ctx.beginPath();
+    ctx.moveTo(-pen,-12); ctx.lineTo(16,-12); ctx.lineTo(5,12); ctx.lineTo(-pen,10);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle='rgba(15,23,42,.35)';
+    ctx.beginPath();
+    ctx.moveTo(-pen,-12); ctx.lineTo(16,-12); ctx.lineTo(13,-4); ctx.lineTo(-pen,-4);
+    ctx.closePath(); ctx.fill();
+    ctx.restore();
+
+    /* Percikan api */
+    const n=1+Math.round(feed*4);
+    for(let i=0;i<n;i++) emit(px,py,feed);
+    ctx.lineCap='round';
+    for(let i=sparks.length-1;i>=0;i--){
+      const s=sparks[i];
+      s.vy+=s.g; s.x+=s.vx; s.y+=s.vy; s.vx*=.995; s.life-=s.dk;
+      if(s.life<=0||s.y>H+30||s.x>W+50){ sparks.splice(i,1); continue; }
+      ctx.globalAlpha=Math.max(0,Math.min(1,s.life));
+      ctx.strokeStyle=s.c; ctx.lineWidth=s.w;
+      ctx.beginPath();
+      ctx.moveTo(s.x,s.y);
+      ctx.lineTo(s.x-s.vx*2.3,s.y-s.vy*2.3);
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+
+    rot+=.09+feed*.13;
+    if(feedEl) feedEl.textContent=Math.round(feed*100)+'%';
+    if(sparkEl) sparkEl.textContent=sparks.length;
+  }
+
+  const reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){ feed=.7; drawScene(); }
+  else{ (function loop(){ drawScene(); requestAnimationFrame(loop); })(); }
+})();
+
+/* Tahun footer otomatis */
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
